@@ -68,9 +68,9 @@
     if (err) {
         NSLog(@"Error occurred assigning system sound!");
     }
-    /*添加音频结束时的回调*/
+    /*callback when finish*/
     AudioServicesAddSystemSoundCompletion(soundID, NULL, NULL, SoundFinished, (__bridge void *)(sample));
-    /*开始播放*/
+    /*start play record*/
     AudioServicesPlaySystemSound(soundID);
     CFRunLoopRun();
     
@@ -89,7 +89,7 @@
 #pragma mark -- private
 
 void SoundFinished(SystemSoundID soundID,void* sample){
-    /*播放全部结束，因此释放所有资源 */
+    /*release all the resource when finishing playing*/
     AudioServicesDisposeSystemSoundID((unsigned long)sample);
     CFRelease(sample);
     CFRunLoopStop(CFRunLoopGetCurrent());

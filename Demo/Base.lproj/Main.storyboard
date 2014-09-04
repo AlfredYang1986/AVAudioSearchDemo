@@ -4,10 +4,10 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <scenes>
-        <!--View Controller - Data Package-->
+        <!--Data Package View Controller - Data Package-->
         <scene sceneID="oOK-6I-KCX">
             <objects>
-                <viewController id="QdC-fP-LLD" sceneMemberID="viewController">
+                <viewController id="QdC-fP-LLD" customClass="BFDataPackageViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="GyX-38-y3F"/>
                         <viewControllerLayoutGuide type="bottom" id="TqZ-3h-ddO"/>
@@ -73,19 +73,31 @@
                                 <state key="normal" title="Download">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="downloadDataPackage" destination="QdC-fP-LLD" eventType="touchUpInside" id="7Rd-70-mv9"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1cr-Kp-oCX">
                                 <rect key="frame" x="188" y="459" width="112" height="45"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                <state key="normal" title="Refresh">
+                                <state key="normal" title="Delete">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="deleteDataPackage" destination="QdC-fP-LLD" eventType="touchUpInside" id="0dG-xR-p2B"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Data Package" id="jJt-Z9-gOi"/>
+                    <connections>
+                        <outlet property="authTokenLabel" destination="on9-C8-fCZ" id="x92-O7-CzA"/>
+                        <outlet property="messageTextField" destination="qLf-L4-dmK" id="efi-a7-lje"/>
+                        <outlet property="packageNameLabel" destination="LRd-Mm-7eN" id="ITh-1S-Lbm"/>
+                        <outlet property="urlTextField" destination="emS-o8-MrO" id="qXb-ji-V62"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KAh-p1-b8B" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -279,7 +291,7 @@
                                 <rect key="frame" x="213" y="262" width="87" height="45"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                <state key="normal" title="To FLIC">
+                                <state key="normal" title="To WAV">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>

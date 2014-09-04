@@ -7,12 +7,18 @@
 //
 
 #import "BFRecordingPathHelper.h"
+#import "BFDataPackageXMLParser.h"
+
+@interface BFRecordingPathHelper ()
+@property (nonatomic, strong) BFRemoteRequest * requestInstance;
+@end
 
 @implementation BFRecordingPathHelper {
     NSArray* recordings;
 }
 
 @synthesize current = _current;
+@synthesize requestInstance = _requestInstance;
 
 #pragma mark -- constructor
 
@@ -21,6 +27,8 @@
     if ([self createRecordingDirectory]) {
         [self resetRecordingEnumable];
     }
+    [self createDownloadDirectory];
+    self.requestInstance = [[BFRemoteRequest alloc]init];
     return self;
 }
 
@@ -43,10 +51,7 @@
 
 -(NSString*)getDirPath
 {
-    NSString *documentsPath = NSHomeDirectory();//[self dirDoc];
-    NSString *testDirectory = [documentsPath stringByAppendingPathComponent:@"RecordingDemo"];
-    
-    return testDirectory;
+    return [self getDirPathWithName:@"RecordingDemo"];
 }
 
 -(NSArray*)getEnumableRecordingPath
@@ -59,21 +64,7 @@
 
 -(BOOL)createRecordingDirectory
 {
-    if ([self isRecordingDirExist]) {
-        return true;
-    }
-    
-    NSString *documentsPath = NSHomeDirectory();//[self dirDoc];
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    NSString *testDirectory = [documentsPath stringByAppendingPathComponent:@"RecordingDemo"];
-    
-    BOOL res = [fileManager createDirectoryAtPath:testDirectory withIntermediateDirectories:YES attributes:nil error:nil];
-    if (res) {
-        NSLog(@"Create Directory Success!");
-    }else {
-        NSLog(@"Create Directtory Failed!");
-    }
-    return res;
+    return [self createDirWithName:@"RecordingDemo"];
 }
 
 -(NSURL*)getCurrentRecordingPath
@@ -83,15 +74,71 @@
     return [NSURL fileURLWithPath:[testDirectory stringByAppendingPathComponent: [recordings objectAtIndex:self.current]]];
 }
 
+-(NSString*)getDownloadDir
+{
+    return [self getDirPathWithName:@"Downloads"];
+}
+
+-(BOOL)createDownloadDirectory
+{
+    return [self createDirWithName:@"Downloads"];
+}
+
+-(BOOL)downloadDataPackage
+{
+    [self.requestInstance downloadDataPackageToPath:[self getDownloadDataPackageStringWithName:@"megawardrobe"]];
+    return false;
+}
+
+-(NSDictionary*)getDatePackageAttribute
+{
+    return nil;
+}
+
+-(NSURL*)getDownloadDataPackagePathWithName:(NSString*)fileName
+{
+    NSString *documentsPath = NSHomeDirectory();//[self dirDoc];
+    NSString *testDirectory = [documentsPath stringByAppendingPathComponent:@"Downloads"];
+    return [NSURL fileURLWithPath:[testDirectory stringByAppendingPathComponent: fileName]];
+}
+
+-(NSString*)getDownloadDataPackageStringWithName:(NSString*)fileName
+{
+    NSString *documentsPath = NSHomeDirectory();//[self dirDoc];
+    NSString *testDirectory = [documentsPath stringByAppendingPathComponent:@"Downloads"];
+    NSString *testfile = [testDirectory stringByAppendingPathComponent:fileName];
+    NSString *path = [testfile stringByAppendingPathExtension:@"xml"];
+    return path;
+}
+
 #pragma mark -- private
 
--(BOOL)isRecordingDirExist
+-(BOOL)isDirExist:(NSString*)dir
 {
     NSString *documentsPath = NSHomeDirectory();//[self dirDoc];
     NSFileManager *fileManager = [NSFileManager defaultManager];
-    NSString *testDirectory = [documentsPath stringByAppendingPathComponent:@"RecordingDemo"];
+    NSString *testDirectory = [documentsPath stringByAppendingPathComponent:dir];
     
     return [fileManager fileExistsAtPath:testDirectory];
+}
+
+-(BOOL)createDirWithName:(NSString*)dir
+{
+    if ([self isDirExist:dir]) {
+        return true;
+    }
+    
+    NSString *documentsPath = NSHomeDirectory();//[self dirDoc];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSString *testDirectory = [documentsPath stringByAppendingPathComponent:dir];
+    
+    BOOL res = [fileManager createDirectoryAtPath:testDirectory withIntermediateDirectories:YES attributes:nil error:nil];
+    if (res) {
+        NSLog(@"Create Directory Success!");
+    }else {
+        NSLog(@"Create Directtory Failed!");
+    }
+    return res;
 }
 
 -(void)resetRecordingEnumable
@@ -110,4 +157,13 @@
     }
     recordings = [reVal copy];
 }
+
+-(NSString*)getDirPathWithName:(NSString*)dir
+{
+    NSString *documentsPath = NSHomeDirectory();//[self dirDoc];
+    NSString *testDirectory = [documentsPath stringByAppendingPathComponent:dir];
+    
+    return testDirectory;
+}
+
 @end

@@ -12,6 +12,7 @@
 #import <CoreAudio/CoreAudioTypes.h>
 #import "BFRecordingPathHelper.h"
 #import "BFRecordsTableViewController.h"
+#import "BFDataPackageViewController.h"
 
 @interface BFViewController () <AVAudioRecorderDelegate>
 @property (nonatomic, strong) BFRecordingPathHelper* pathHelper;
@@ -112,6 +113,8 @@
 {
     if ([segue.identifier isEqualToString:@"Records"]) {
         ((BFRecordsTableViewController*)segue.destinationViewController).pathHelper = self.pathHelper;
+    } else {
+        ((BFDataPackageViewController*)segue.destinationViewController).pathHelper = self.pathHelper;
     }
 }
 @end
