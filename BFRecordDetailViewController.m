@@ -9,6 +9,7 @@
 #import "BFRecordDetailViewController.h"
 #import <AudioToolbox/AudioToolbox.h>
 #import <CoreFoundation/CoreFoundation.h>
+#import "BFSearchResultViewController.h"
 
 @interface BFRecordDetailViewController ()
 
@@ -34,8 +35,9 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.recordNameLabel.text = [[self.pathHelper getEnumableRecordingPath]objectAtIndex:self.pathHelper.current];
-    self.recordFormatLabel.text = [[self.pathHelper getEnumableRecordingPath]objectAtIndex:self.pathHelper.current];
+    NSString* fileName = [[self.pathHelper getEnumableRecordingPath]objectAtIndex:self.pathHelper.current];
+    self.recordNameLabel.text = fileName;
+    self.recordFormatLabel.text = [fileName substringFromIndex:[fileName rangeOfString:@"."].location];
 }
 
 - (void)didReceiveMemoryWarning
@@ -79,11 +81,7 @@
 - (IBAction)searchWithCurrentRecord
 {
     NSLog(@"search with current record");
-}
-
-- (IBAction)changeFormatToFlic
-{
-    NSLog(@"change format of current record for google sapi");
+    [self.pathHelper uploadAudioFileWithFilename:[self.pathHelper getCurrentRecordingFilename]];
 }
 
 #pragma mark -- private
@@ -93,5 +91,17 @@ void SoundFinished(SystemSoundID soundID,void* sample){
     AudioServicesDisposeSystemSoundID((unsigned long)sample);
     CFRelease(sample);
     CFRunLoopStop(CFRunLoopGetCurrent());
+}
+
+- (IBAction)showResultTest
+{
+    [self performSegueWithIdentifier:@"SearchResult" sender:nil];
+}
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"SearchResult"]) {
+        ((BFSearchResultViewController*)segue.destinationViewController).resultData = [self.pathHelper searchResult];
+    }
 }
 @end

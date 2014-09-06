@@ -10,4 +10,9 @@
 
 @interface BFRemoteRequest : NSObject
 -(BOOL)downloadDataPackageToPath:(NSString*)path;
+-(void)uploadFileWithURL:(NSURL*)url data:(NSData*)data;
+
+#pragma mark -- json parser
+-(id)searchResultFormFile:(NSString*)fileName;
+-(id)searchResultFormURL:(NSString*)hostUrl;
 @end

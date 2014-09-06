@@ -22,12 +22,20 @@
 -(NSArray*)getEnumableRecordingPath;
 -(BOOL)createRecordingDirectory;
 -(NSURL*)getCurrentRecordingPath;
+-(NSString*)getCurrentRecordingFilename;
 
 #pragma mark -- for downloading
 -(NSString*)getDownloadDir;
 -(BOOL)createDownloadDirectory;
 -(BOOL)downloadDataPackage;
+-(void)deleteDataPackage;
 -(NSDictionary*)getDatePackageAttribute;
 -(NSURL*)getDownloadDataPackagePathWithName:(NSString*)fileName;
 -(NSString*)getDownloadDataPackageStringWithName:(NSString*)fileName;
+
+#pragma mark -- for upload
+-(void)uploadAudioFileWithFilename:(NSString*)fileName;
+
+#pragma mark -- for json search result
+-(NSDictionary*)searchResult;
 @end

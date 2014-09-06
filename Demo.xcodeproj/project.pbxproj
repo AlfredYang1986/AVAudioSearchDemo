@@ -9,11 +9,12 @@
 /* Begin PBXBuildFile section */
 		EE204E1519B6F29D000E38EF /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE204E1419B6F29D000E38EF /* AVFoundation.framework */; };
 		EE204E1719B6F2A4000E38EF /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE204E1619B6F2A4000E38EF /* CoreAudio.framework */; };
+		EE7F7A2119BB52C900BCB4A8 /* BFSearchResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE7F7A2019BB52C900BCB4A8 /* BFSearchResultViewController.m */; };
+		EE7F7A2A19BB5D2900BCB4A8 /* BFSearchResultModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EE7F7A2919BB5D2900BCB4A8 /* BFSearchResultModel.m */; };
 		EE82CC8819B748A40096B874 /* BFRecordingPathHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = EE82CC8719B748A40096B874 /* BFRecordingPathHelper.m */; };
 		EE82CC8B19B75D050096B874 /* BFRecordsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE82CC8A19B75D050096B874 /* BFRecordsTableViewController.m */; };
 		EE82CC8E19B76B550096B874 /* BFRecordDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE82CC8D19B76B550096B874 /* BFRecordDetailViewController.m */; };
 		EE82CC9019B7761C0096B874 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE82CC8F19B7761C0096B874 /* AudioToolbox.framework */; };
-		EE82CC9219B77CF90096B874 /* libFLACIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE82CC9119B77CF90096B874 /* libFLACIOS.framework */; };
 		EECA8A9019B69F42009A9B4B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EECA8A8F19B69F42009A9B4B /* Foundation.framework */; };
 		EECA8A9219B69F42009A9B4B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EECA8A9119B69F42009A9B4B /* CoreGraphics.framework */; };
 		EECA8A9419B69F42009A9B4B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EECA8A9319B69F42009A9B4B /* UIKit.framework */; };
@@ -46,6 +47,10 @@
 /* Begin PBXFileReference section */
 		EE204E1419B6F29D000E38EF /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		EE204E1619B6F2A4000E38EF /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
+		EE7F7A1F19BB52C900BCB4A8 /* BFSearchResultViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFSearchResultViewController.h; sourceTree = "<group>"; };
+		EE7F7A2019BB52C900BCB4A8 /* BFSearchResultViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFSearchResultViewController.m; sourceTree = "<group>"; };
+		EE7F7A2819BB5D2900BCB4A8 /* BFSearchResultModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFSearchResultModel.h; sourceTree = "<group>"; };
+		EE7F7A2919BB5D2900BCB4A8 /* BFSearchResultModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFSearchResultModel.m; sourceTree = "<group>"; };
 		EE82CC8619B748A40096B874 /* BFRecordingPathHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFRecordingPathHelper.h; sourceTree = "<group>"; };
 		EE82CC8719B748A40096B874 /* BFRecordingPathHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFRecordingPathHelper.m; sourceTree = "<group>"; };
 		EE82CC8919B75D050096B874 /* BFRecordsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFRecordsTableViewController.h; sourceTree = "<group>"; };
@@ -53,7 +58,6 @@
 		EE82CC8C19B76B550096B874 /* BFRecordDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFRecordDetailViewController.h; sourceTree = "<group>"; };
 		EE82CC8D19B76B550096B874 /* BFRecordDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFRecordDetailViewController.m; sourceTree = "<group>"; };
 		EE82CC8F19B7761C0096B874 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
-		EE82CC9119B77CF90096B874 /* libFLACIOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = libFLACIOS.framework; sourceTree = "<group>"; };
 		EECA8A8C19B69F42009A9B4B /* Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EECA8A8F19B69F42009A9B4B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		EECA8A9119B69F42009A9B4B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -86,7 +90,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EE82CC9219B77CF90096B874 /* libFLACIOS.framework in Frameworks */,
 				EE82CC9019B7761C0096B874 /* AudioToolbox.framework in Frameworks */,
 				EE204E1719B6F2A4000E38EF /* CoreAudio.framework in Frameworks */,
 				EE204E1519B6F29D000E38EF /* AVFoundation.framework in Frameworks */,
@@ -120,6 +123,8 @@
 				EE82CC8D19B76B550096B874 /* BFRecordDetailViewController.m */,
 				EEFB4A4C19B89C0000FB66DB /* BFDataPackageViewController.h */,
 				EEFB4A4D19B89C0000FB66DB /* BFDataPackageViewController.m */,
+				EE7F7A1F19BB52C900BCB4A8 /* BFSearchResultViewController.h */,
+				EE7F7A2019BB52C900BCB4A8 /* BFSearchResultViewController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -133,6 +138,8 @@
 				EEFB4A5019B8A45500FB66DB /* BFRemoteRequest.m */,
 				EEFB4A5219B8B3DE00FB66DB /* BFDataPackageXMLParser.h */,
 				EEFB4A5319B8B3DE00FB66DB /* BFDataPackageXMLParser.m */,
+				EE7F7A2819BB5D2900BCB4A8 /* BFSearchResultModel.h */,
+				EE7F7A2919BB5D2900BCB4A8 /* BFSearchResultModel.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -161,7 +168,6 @@
 		EECA8A8E19B69F42009A9B4B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				EE82CC9119B77CF90096B874 /* libFLACIOS.framework */,
 				EE82CC8F19B7761C0096B874 /* AudioToolbox.framework */,
 				EE204E1619B6F2A4000E38EF /* CoreAudio.framework */,
 				EE204E1419B6F29D000E38EF /* AVFoundation.framework */,
@@ -313,10 +319,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				EEFB4A4E19B89C0000FB66DB /* BFDataPackageViewController.m in Sources */,
+				EE7F7A2A19BB5D2900BCB4A8 /* BFSearchResultModel.m in Sources */,
 				EEFB4A5119B8A45500FB66DB /* BFRemoteRequest.m in Sources */,
 				EE82CC8E19B76B550096B874 /* BFRecordDetailViewController.m in Sources */,
 				EEFB4A5419B8B3DE00FB66DB /* BFDataPackageXMLParser.m in Sources */,
 				EE82CC8819B748A40096B874 /* BFRecordingPathHelper.m in Sources */,
+				EE7F7A2119BB52C900BCB4A8 /* BFSearchResultViewController.m in Sources */,
 				EE82CC8B19B75D050096B874 /* BFRecordsTableViewController.m in Sources */,
 				EECA8AA619B69F42009A9B4B /* BFViewController.m in Sources */,
 				EECA8AA019B69F42009A9B4B /* BFAppDelegate.m in Sources */,

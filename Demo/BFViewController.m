@@ -60,9 +60,10 @@
         //This is a good resource: http://www.totodotnet.net/tag/avaudiorecorder/
         NSMutableDictionary* recordSetting = [[NSMutableDictionary alloc] init];
         
-        [recordSetting setValue :[NSNumber numberWithInt:kAudioFormatAppleIMA4] forKey:AVFormatIDKey];
+//        [recordSetting setValue :[NSNumber numberWithInt:kAudioFormatAppleIMA4] forKey:AVFormatIDKey];
+        [recordSetting setValue :[NSNumber numberWithInt: kAudioFormatLinearPCM] forKey:AVFormatIDKey];
         
-        [recordSetting setValue:[NSNumber numberWithFloat:16000.0] forKey:AVSampleRateKey];
+        [recordSetting setValue:[NSNumber numberWithFloat: 16000.0] forKey:AVSampleRateKey];
         [recordSetting setValue:[NSNumber numberWithInt: 1] forKey:AVNumberOfChannelsKey];
         [recordSetting setValue:[NSNumber numberWithInt: 16] forKey:AVLinearPCMBitDepthKey];
         

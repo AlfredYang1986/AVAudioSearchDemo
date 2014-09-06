@@ -73,7 +73,8 @@
 
 - (IBAction)deleteDataPackage
 {
-    
+    [self.pathHelper deleteDataPackage];
+    [self resetView];
 }
 
 -(void)resetView

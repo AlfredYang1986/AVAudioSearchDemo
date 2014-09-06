@@ -214,10 +214,10 @@
             </objects>
             <point key="canvasLocation" x="745" y="117"/>
         </scene>
-        <!--View Controller - Search Result-->
+        <!--Search Result View Controller - Search Result-->
         <scene sceneID="hNL-VR-Mz0">
             <objects>
-                <viewController id="rtG-B6-x6b" sceneMemberID="viewController">
+                <viewController id="rtG-B6-x6b" customClass="BFSearchResultViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="dBl-49-RQP"/>
                         <viewControllerLayoutGuide type="bottom" id="iIO-L3-wdp"/>
@@ -230,11 +230,18 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="rtG-B6-x6b" id="msB-5x-fJe"/>
+                                    <outlet property="delegate" destination="rtG-B6-x6b" id="FJP-LI-XYg"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Search Result" id="Ny6-PO-z2a"/>
+                    <connections>
+                        <segue destination="Xsd-yw-fgb" kind="push" identifier="ResultDetail" id="Jrb-4f-g5j"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x7Q-ur-Ot4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -288,14 +295,14 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oog-3M-PK3">
-                                <rect key="frame" x="213" y="262" width="87" height="45"/>
+                                <rect key="frame" x="188" y="262" width="112" height="45"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                <state key="normal" title="To WAV">
+                                <state key="normal" title="Show Result">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="changeFormatToFlic" destination="xaX-en-9lG" eventType="touchUpInside" id="N5m-Kj-PND"/>
+                                    <action selector="showResultTest" destination="xaX-en-9lG" eventType="touchUpInside" id="wMt-eQ-Cwj"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7cc-MC-X8R">
@@ -307,7 +314,6 @@
                                 </state>
                                 <connections>
                                     <action selector="searchWithCurrentRecord" destination="xaX-en-9lG" eventType="touchUpInside" id="hqE-Ba-YJN"/>
-                                    <segue destination="rtG-B6-x6b" kind="push" id="xOw-4v-jfl"/>
                                 </connections>
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Format:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7MU-xN-raI">
@@ -330,11 +336,31 @@
                         <outlet property="recordFormatLabel" destination="8wW-4M-zc6" id="DeG-Fk-DXm"/>
                         <outlet property="recordLengthLabel" destination="IMH-zg-VvV" id="xxT-Jt-bXx"/>
                         <outlet property="recordNameLabel" destination="aBp-qs-MPc" id="3d3-DJ-FKl"/>
+                        <segue destination="rtG-B6-x6b" kind="push" identifier="SearchResult" id="x5B-Dk-c9t"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3aH-IS-DDP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1740" y="117"/>
+        </scene>
+        <!--View Controller - Search Result Detail-->
+        <scene sceneID="aE2-0L-cln">
+            <objects>
+                <viewController id="Xsd-yw-fgb" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="1M7-bu-Qjm"/>
+                        <viewControllerLayoutGuide type="bottom" id="rrA-J8-9uX"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="wTo-Nq-svG">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Search Result Detail" id="zsY-6X-m51"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wMi-CF-ety" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2705" y="117"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="xQS-aa-agY">

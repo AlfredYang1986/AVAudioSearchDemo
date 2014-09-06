@@ -46,7 +46,8 @@
 {
     NSString *documentsPath = NSHomeDirectory();//[self dirDoc];
     NSString *testDirectory = [documentsPath stringByAppendingPathComponent:@"RecordingDemo"];
-    return [NSURL fileURLWithPath:[testDirectory stringByAppendingPathComponent: [NSString stringWithFormat: @"%.0f.%@", [NSDate timeIntervalSinceReferenceDate] * 1000.0, @"caf"]]];
+    return [NSURL fileURLWithPath:[testDirectory stringByAppendingPathComponent: [NSString stringWithFormat: @"%.0f.%@", [NSDate timeIntervalSinceReferenceDate] * 1000.0, @"wav"]]];
+//    return [NSURL fileURLWithPath:[testDirectory stringByAppendingPathComponent: [NSString stringWithFormat: @"%.0f.%@", [NSDate timeIntervalSinceReferenceDate] * 1000.0, @"caf"]]];
 }
 
 -(NSString*)getDirPath
@@ -109,6 +110,32 @@
     NSString *testfile = [testDirectory stringByAppendingPathComponent:fileName];
     NSString *path = [testfile stringByAppendingPathExtension:@"xml"];
     return path;
+}
+
+-(void)deleteDataPackage
+{
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSURL* path = [self getDownloadDataPackagePathWithName:@"megawardrobe"];
+    [fileManager removeItemAtURL:path error:nil];
+}
+
+-(void)uploadAudioFileWithFilename:(NSString*)fileName
+{
+    NSString * url = [@"http://dev.megawardrobe.com:8080/Service.svc/UploadFile?fileName=" stringByAppendingString:fileName];
+    
+    NSURL* path = [self getCurrentRecordingPath];
+    NSData *data = [NSData dataWithContentsOfURL:path];
+    [self.requestInstance uploadFileWithURL:[NSURL URLWithString:url] data:data];
+}
+
+-(NSString*)getCurrentRecordingFilename
+{
+    return [recordings objectAtIndex:self.current];
+}
+
+-(NSDictionary*)searchResult
+{
+    return [self.requestInstance searchResultFormFile:@"AppSearchDemoData"];
 }
 
 #pragma mark -- private
