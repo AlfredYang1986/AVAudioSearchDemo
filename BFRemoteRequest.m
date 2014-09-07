@@ -70,15 +70,28 @@
 
 -(id)searchResultFormFile:(NSString*)fileName
 {
-    NSError * error = nil;
     NSString* filePath = [[NSTemporaryDirectory() stringByAppendingPathComponent:fileName] stringByAppendingPathExtension:@"json"];
     
-    NSData *response = [NSData dataWithContentsOfFile:filePath options:NSDataReadingUncached error:&error];
-    if (response == nil) {
-        NSLog(@"%@", error);
-    }
+    NSData *response = [NSData dataWithContentsOfFile:filePath options:NSDataReadingUncached error:nil];
+   
+    return [self searchDataFromData:response];
+}
+
+-(id)searchResultFormURL:(NSString*)hostUrl withWAVFile:(NSString*)fileName
+{
+    NSString * httpPath = [@"http://dev.megawardrobe.com:8080/Service.svc/UploadFile?fileName=" stringByAppendingString:fileName];
     
-    NSDictionary * apperals = [NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingMutableLeaves | NSJSONReadingMutableContainers error:&error];
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:httpPath]];
+    
+    NSData *response = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
+    
+    return [self searchDataFromData:response];
+}
+
+-(id)searchDataFromData:(NSData*)data
+{
+    NSError * error = nil;
+    NSDictionary * apperals = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves | NSJSONReadingMutableContainers error:&error];
     if (apperals == nil) {
         NSLog(@"%@", error);
     }
@@ -97,19 +110,5 @@
         NSLog(@"An error happened while deserializing the JSON data.");
         return nil;
     }
-}
-
--(NSDictionary*)searchResultFormURL:(NSString*)hostUrl
-{
-    NSError *error;
-    //加载一个NSURL对象
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://m.weather.com.cn/data/101180601.html"]];
-    //将请求的url数据放到NSData对象中
-    NSData *response = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
-    //IOS5自带解析类NSJSONSerialization从response中解析出数据放到字典中
-    NSDictionary *weatherDic = [NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingMutableLeaves error:&error];
-    NSDictionary *weatherInfo = [weatherDic objectForKey:@"weatherinfo"];
-    NSLog(@"weatherInfo字典里面的内容为--》%@", weatherDic );
-    return weatherInfo;
 }
 @end

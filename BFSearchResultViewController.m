@@ -7,6 +7,7 @@
 //
 
 #import "BFSearchResultViewController.h"
+#import "BFResultDetailViewController.h"
 
 @interface BFSearchResultViewController ()
 
@@ -47,6 +48,14 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"ResultDetail"]) {
+        NSIndexPath* index = (NSIndexPath*)sender;
+        ((BFResultDetailViewController*)segue.destinationViewController).detail = [self.resultData objectAtIndex:index.row];
+    }
+}
 
 #pragma mark -- datasource
 

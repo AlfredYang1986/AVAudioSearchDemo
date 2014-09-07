@@ -29,6 +29,7 @@
 		EECA8AB119B69F43009A9B4B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EECA8A9319B69F42009A9B4B /* UIKit.framework */; };
 		EECA8AB919B69F43009A9B4B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = EECA8AB719B69F43009A9B4B /* InfoPlist.strings */; };
 		EECA8ABB19B69F43009A9B4B /* DemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EECA8ABA19B69F43009A9B4B /* DemoTests.m */; };
+		EEF9184C19BBDF000072206B /* BFResultDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEF9184B19BBDF000072206B /* BFResultDetailViewController.m */; };
 		EEFB4A4E19B89C0000FB66DB /* BFDataPackageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEFB4A4D19B89C0000FB66DB /* BFDataPackageViewController.m */; };
 		EEFB4A5119B8A45500FB66DB /* BFRemoteRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = EEFB4A5019B8A45500FB66DB /* BFRemoteRequest.m */; };
 		EEFB4A5419B8B3DE00FB66DB /* BFDataPackageXMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = EEFB4A5319B8B3DE00FB66DB /* BFDataPackageXMLParser.m */; };
@@ -77,6 +78,8 @@
 		EECA8AB619B69F43009A9B4B /* DemoTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DemoTests-Info.plist"; sourceTree = "<group>"; };
 		EECA8AB819B69F43009A9B4B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		EECA8ABA19B69F43009A9B4B /* DemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DemoTests.m; sourceTree = "<group>"; };
+		EEF9184A19BBDF000072206B /* BFResultDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFResultDetailViewController.h; sourceTree = "<group>"; };
+		EEF9184B19BBDF000072206B /* BFResultDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFResultDetailViewController.m; sourceTree = "<group>"; };
 		EEFB4A4C19B89C0000FB66DB /* BFDataPackageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFDataPackageViewController.h; sourceTree = "<group>"; };
 		EEFB4A4D19B89C0000FB66DB /* BFDataPackageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFDataPackageViewController.m; sourceTree = "<group>"; };
 		EEFB4A4F19B8A45500FB66DB /* BFRemoteRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFRemoteRequest.h; sourceTree = "<group>"; };
@@ -125,6 +128,8 @@
 				EEFB4A4D19B89C0000FB66DB /* BFDataPackageViewController.m */,
 				EE7F7A1F19BB52C900BCB4A8 /* BFSearchResultViewController.h */,
 				EE7F7A2019BB52C900BCB4A8 /* BFSearchResultViewController.m */,
+				EEF9184A19BBDF000072206B /* BFResultDetailViewController.h */,
+				EEF9184B19BBDF000072206B /* BFResultDetailViewController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -324,6 +329,7 @@
 				EE82CC8E19B76B550096B874 /* BFRecordDetailViewController.m in Sources */,
 				EEFB4A5419B8B3DE00FB66DB /* BFDataPackageXMLParser.m in Sources */,
 				EE82CC8819B748A40096B874 /* BFRecordingPathHelper.m in Sources */,
+				EEF9184C19BBDF000072206B /* BFResultDetailViewController.m in Sources */,
 				EE7F7A2119BB52C900BCB4A8 /* BFSearchResultViewController.m in Sources */,
 				EE82CC8B19B75D050096B874 /* BFRecordsTableViewController.m in Sources */,
 				EECA8AA619B69F42009A9B4B /* BFViewController.m in Sources */,
