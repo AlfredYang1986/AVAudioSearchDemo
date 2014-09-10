@@ -69,7 +69,7 @@
     }
     
     cell.textLabel.text = [[self.resultData objectAtIndex:indexPath.row] objectForKey:@"Title"];
-    cell.detailTextLabel.text = [[self.resultData objectAtIndex:indexPath.row] objectForKey:@"Brand"];
+    cell.detailTextLabel.text = [[self.resultData objectAtIndex:indexPath.row] objectForKey:@"Color"];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     //    NSString *path = [[NSBundle mainBundle] pathForResource:[item objectForKey:@"imageKey"] ofType:@"png"];
     //    UIImage *theImage = [UIImage imageWithContentsOfFile:path];

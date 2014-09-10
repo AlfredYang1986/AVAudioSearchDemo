@@ -81,7 +81,8 @@
 - (IBAction)searchWithCurrentRecord
 {
     NSLog(@"search with current record");
-    [self.pathHelper uploadAudioFileWithFilename:[self.pathHelper getCurrentRecordingFilename]];
+//    [self.pathHelper uploadAudioFileWithFilename:[self.pathHelper getCurrentRecordingFilename]];
+    [self performSegueWithIdentifier:@"SearchResult" sender:nil];
 }
 
 #pragma mark -- private
@@ -101,7 +102,10 @@ void SoundFinished(SystemSoundID soundID,void* sample){
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.identifier isEqualToString:@"SearchResult"]) {
-        ((BFSearchResultViewController*)segue.destinationViewController).resultData = [self.pathHelper searchResult];
+//        ((BFSearchResultViewController*)segue.destinationViewController).resultData = [self.pathHelper searchResult];
+        NSString* fileName = [self.pathHelper getCurrentRecordingFilename];
+        ((BFSearchResultViewController*)segue.destinationViewController).resultData = [self.pathHelper searchResultWithWAVFile:fileName];
+        
     }
 }
 @end

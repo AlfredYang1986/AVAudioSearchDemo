@@ -129,6 +129,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Records" id="RXw-hh-GIa"/>
                     <connections>
+                        <outlet property="recodsView" destination="aEc-6i-1CU" id="guc-eT-bzP"/>
                         <segue destination="xaX-en-9lG" kind="push" identifier="record_detail" id="jcq-KC-saV"/>
                     </connections>
                 </viewController>

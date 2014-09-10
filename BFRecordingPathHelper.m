@@ -24,12 +24,17 @@
 
 -(id)init
 {
+    [self resetPathHelper];
+    return self;
+}
+
+-(void)resetPathHelper
+{
     if ([self createRecordingDirectory]) {
         [self resetRecordingEnumable];
     }
     [self createDownloadDirectory];
     self.requestInstance = [[BFRemoteRequest alloc]init];
-    return self;
 }
 
 #pragma mark -- public
@@ -121,7 +126,7 @@
 
 -(void)uploadAudioFileWithFilename:(NSString*)fileName
 {
-    NSString * url = [@"http://dev.megawardrobe.com:8080/Service.svc/UploadFile?fileName=" stringByAppendingString:fileName];
+    NSString * url = [@"http://54.252.188.201:8080/Service.svc/UploadFile?fileName=" stringByAppendingString:fileName];
     
     NSURL* path = [self getCurrentRecordingPath];
     NSData *data = [NSData dataWithContentsOfURL:path];
@@ -133,9 +138,18 @@
     return [recordings objectAtIndex:self.current];
 }
 
--(NSDictionary*)searchResult
+-(NSArray*)searchResult
 {
     return [self.requestInstance searchResultFormFile:@"AppSearchDemoData"];
+}
+
+-(NSArray*)searchResultWithWAVFile:(NSString*)fileName
+{
+    NSString * URL = [@"http://54.252.188.201:8080/Service.svc/AppSearchDemoWithAVAudio?fileName=" stringByAppendingString:fileName];
+    
+    NSURL* path = [self getCurrentRecordingPath];
+    NSData *data = [NSData dataWithContentsOfURL:path];
+    return [self.requestInstance searchResultFormURL:[NSURL URLWithString:URL] withWAVData:data];
 }
 
 #pragma mark -- private
@@ -191,6 +205,18 @@
     NSString *testDirectory = [documentsPath stringByAppendingPathComponent:dir];
     
     return testDirectory;
+}
+
+-(void)deleteFileWithFileName:(NSString*)fileName
+{
+    [self deleteFileWithIndex:[recordings indexOfObject:fileName]];
+}
+
+-(void)deleteFileWithIndex:(NSInteger)index
+{
+    self.current = index;
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    [fileManager removeItemAtURL:[self getCurrentRecordingPath] error:nil];
 }
 
 @end

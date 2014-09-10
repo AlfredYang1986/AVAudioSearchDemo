@@ -11,4 +11,7 @@
 
 @interface BFRecordsTableViewController : UIViewController
 @property (nonatomic, weak) BFRecordingPathHelper* pathHelper;
+@property (weak, nonatomic) IBOutlet UITableView *recodsView;
+
+-(void)editButtonDidClick:(id)sender;
 @end

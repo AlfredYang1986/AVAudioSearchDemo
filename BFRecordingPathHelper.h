@@ -14,6 +14,7 @@
 @property (nonatomic) NSInteger current;
 
 -(id)init;
+-(void)resetPathHelper;
 
 #pragma mark -- for recording
 -(int)getTotalRecordNumber;
@@ -23,6 +24,8 @@
 -(BOOL)createRecordingDirectory;
 -(NSURL*)getCurrentRecordingPath;
 -(NSString*)getCurrentRecordingFilename;
+-(void)deleteFileWithFileName:(NSString*)fileName;
+-(void)deleteFileWithIndex:(NSInteger)index;
 
 #pragma mark -- for downloading
 -(NSString*)getDownloadDir;
@@ -37,5 +40,6 @@
 -(void)uploadAudioFileWithFilename:(NSString*)fileName;
 
 #pragma mark -- for json search result
--(NSDictionary*)searchResult;
+-(NSArray*)searchResult;
+-(NSArray*)searchResultWithWAVFile:(NSString*)fileName;
 @end

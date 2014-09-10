@@ -14,5 +14,5 @@
 
 #pragma mark -- json parser
 -(id)searchResultFormFile:(NSString*)fileName;
--(id)searchResultFormURL:(NSString*)hostUrl withWAVFile:(NSString*)fileName;
+-(id)searchResultFormURL:(NSURL*)url withWAVData:(NSData*)data;
 @end

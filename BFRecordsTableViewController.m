@@ -13,9 +13,13 @@
 
 @end
 
-@implementation BFRecordsTableViewController
+@implementation BFRecordsTableViewController {
+    UIBarButtonItem * editButton;
+    UIBarButtonItem * doneButton;
+}
 
 @synthesize pathHelper = _pathHelper;
+@synthesize recodsView = _recodsView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -30,6 +34,10 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    editButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(editButtonDidClick:)];
+    doneButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(editButtonDidClick:)];
+    
+    self.navigationItem.rightBarButtonItem = editButton;
 }
 
 - (void)didReceiveMemoryWarning
@@ -54,6 +62,18 @@
     if ([segue.identifier isEqualToString:@"record_detail"]) {
         ((BFRecordDetailViewController*)segue.destinationViewController).pathHelper = self.pathHelper;
         self.pathHelper.current = ((NSIndexPath*)sender).row;
+    }
+}
+
+-(void)editButtonDidClick:(id)sender
+{
+    NSLog(@"edit button did click");
+    if (self.recodsView.editing) {
+        [self.recodsView setEditing:false animated:true];
+        self.navigationItem.rightBarButtonItem = editButton;
+    } else {
+        [self.recodsView setEditing:true animated:true];
+        self.navigationItem.rightBarButtonItem = doneButton;
     }
 }
 
@@ -84,11 +104,34 @@
     return [self.pathHelper getTotalRecordNumber];
 }
 
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return YES;
+}
+
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return UITableViewCellEditingStyleDelete;
+}
+
 #pragma mark -- delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [self performSegueWithIdentifier:@"record_detail" sender:indexPath];
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        [self.pathHelper deleteFileWithIndex:indexPath.row];
+        [self editButtonDidClick:nil];
+        [self.pathHelper resetPathHelper];
+        NSArray * array = [NSArray arrayWithObjects:indexPath, nil];
+        [tableView beginUpdates];
+        [tableView deleteRowsAtIndexPaths:array withRowAnimation: UITableViewRowAnimationFade];
+        [tableView endUpdates];
+    }
 }
 
 @end

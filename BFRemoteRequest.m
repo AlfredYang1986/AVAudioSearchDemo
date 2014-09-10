@@ -12,7 +12,7 @@
 
 -(BOOL)downloadDataPackageToPath:(NSString*)path
 {
-    NSString *urlAsString = @"http://dev.megawardrobe.com:8080/Service.svc/File/megawardrobe/xml";
+    NSString *urlAsString = @"http://54.252.188.201:8080/Service.svc/File/megawardrobe/xml";
     NSURL    *url = [NSURL URLWithString:urlAsString];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     NSError *error = nil;
@@ -77,15 +77,41 @@
     return [self searchDataFromData:response];
 }
 
--(id)searchResultFormURL:(NSString*)hostUrl withWAVFile:(NSString*)fileName
+-(id)searchResultFormURL:(NSURL*)url withWAVData:(NSData*)data
 {
-    NSString * httpPath = [@"http://dev.megawardrobe.com:8080/Service.svc/UploadFile?fileName=" stringByAppendingString:fileName];
+    // 1> 数据体
+    NSMutableData *dataM = [NSMutableData data];
+    [dataM appendData:data];
     
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:httpPath]];
+    // 1. Request
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url cachePolicy:0 timeoutInterval:2000.0f];
     
-    NSData *response = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
+    // dataM出了作用域就会被释放,因此不用copy
+    request.HTTPBody = dataM;
+    
+    // 2> 设置Request的头属性
+    request.HTTPMethod = @"POST";
+    
+    // 3> 设置Content-Length
+    NSString *strLength = [NSString stringWithFormat:@"%ld", (long)dataM.length];
+    [request setValue:strLength forHTTPHeaderField:@"Content-Length"];
+    
+    // 4> 设置Content-Type
+    //    NSString *strContentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@", randomIDStr];
+    //    [request setValue:strContentType forHTTPHeaderField:@"Content-Type"];
+    
+    // 3> 连接服务器发送请求
+//    [NSURLConnection sendAsynchronousRequest:request queue:[[NSOperationQueue alloc] init] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+//        
+//        NSString *result = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+//        NSLog(@"%@", result);
+//    }];
+
+    NSError * error = nil;
+    NSData *response = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:&error];
     
     return [self searchDataFromData:response];
+//    return nil;
 }
 
 -(id)searchDataFromData:(NSData*)data
