@@ -9,13 +9,16 @@
 #import "BFRecordDetailViewController.h"
 #import <AudioToolbox/AudioToolbox.h>
 #import <CoreFoundation/CoreFoundation.h>
+#import <AVFoundation/AVAudioSession.h>
 #import "BFSearchResultViewController.h"
 
 @interface BFRecordDetailViewController ()
 
 @end
 
-@implementation BFRecordDetailViewController
+@implementation BFRecordDetailViewController {
+
+}
 
 @synthesize pathHelper = _pathHelper;
 @synthesize recordNameLabel = _recordNameLabel;
@@ -38,6 +41,8 @@
     NSString* fileName = [[self.pathHelper getEnumableRecordingPath]objectAtIndex:self.pathHelper.current];
     self.recordNameLabel.text = fileName;
     self.recordFormatLabel.text = [fileName substringFromIndex:[fileName rangeOfString:@"."].location];
+   
+
 }
 
 - (void)didReceiveMemoryWarning

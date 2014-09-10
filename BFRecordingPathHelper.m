@@ -39,7 +39,7 @@
 
 #pragma mark -- public
 
--(int)getTotalRecordNumber
+-(NSInteger)getTotalRecordNumber
 {
     if (recordings == nil) {
         [self resetRecordingEnumable];
@@ -49,7 +49,7 @@
 
 -(NSURL*)getNextRecordingPath
 {
-    NSString *documentsPath = NSHomeDirectory();//[self dirDoc];
+    NSString *documentsPath = [self getDocumentDir];
     NSString *testDirectory = [documentsPath stringByAppendingPathComponent:@"RecordingDemo"];
     return [NSURL fileURLWithPath:[testDirectory stringByAppendingPathComponent: [NSString stringWithFormat: @"%.0f.%@", [NSDate timeIntervalSinceReferenceDate] * 1000.0, @"wav"]]];
 //    return [NSURL fileURLWithPath:[testDirectory stringByAppendingPathComponent: [NSString stringWithFormat: @"%.0f.%@", [NSDate timeIntervalSinceReferenceDate] * 1000.0, @"caf"]]];
@@ -75,7 +75,7 @@
 
 -(NSURL*)getCurrentRecordingPath
 {
-    NSString *documentsPath = NSHomeDirectory();//[self dirDoc];
+    NSString *documentsPath = [self getDocumentDir];
     NSString *testDirectory = [documentsPath stringByAppendingPathComponent:@"RecordingDemo"];
     return [NSURL fileURLWithPath:[testDirectory stringByAppendingPathComponent: [recordings objectAtIndex:self.current]]];
 }
@@ -103,14 +103,14 @@
 
 -(NSURL*)getDownloadDataPackagePathWithName:(NSString*)fileName
 {
-    NSString *documentsPath = NSHomeDirectory();//[self dirDoc];
+    NSString *documentsPath = [self getDocumentDir];
     NSString *testDirectory = [documentsPath stringByAppendingPathComponent:@"Downloads"];
     return [NSURL fileURLWithPath:[testDirectory stringByAppendingPathComponent: fileName]];
 }
 
 -(NSString*)getDownloadDataPackageStringWithName:(NSString*)fileName
 {
-    NSString *documentsPath = NSHomeDirectory();//[self dirDoc];
+    NSString *documentsPath = [self getDocumentDir];
     NSString *testDirectory = [documentsPath stringByAppendingPathComponent:@"Downloads"];
     NSString *testfile = [testDirectory stringByAppendingPathComponent:fileName];
     NSString *path = [testfile stringByAppendingPathExtension:@"xml"];
@@ -156,7 +156,7 @@
 
 -(BOOL)isDirExist:(NSString*)dir
 {
-    NSString *documentsPath = NSHomeDirectory();//[self dirDoc];
+    NSString *documentsPath = [self getDocumentDir];
     NSFileManager *fileManager = [NSFileManager defaultManager];
     NSString *testDirectory = [documentsPath stringByAppendingPathComponent:dir];
     
@@ -169,7 +169,7 @@
         return true;
     }
     
-    NSString *documentsPath = NSHomeDirectory();//[self dirDoc];
+    NSString *documentsPath = [self getDocumentDir];
     NSFileManager *fileManager = [NSFileManager defaultManager];
     NSString *testDirectory = [documentsPath stringByAppendingPathComponent:dir];
     
@@ -201,7 +201,7 @@
 
 -(NSString*)getDirPathWithName:(NSString*)dir
 {
-    NSString *documentsPath = NSHomeDirectory();//[self dirDoc];
+    NSString *documentsPath = [self getDocumentDir];
     NSString *testDirectory = [documentsPath stringByAppendingPathComponent:dir];
     
     return testDirectory;
@@ -219,4 +219,8 @@
     [fileManager removeItemAtURL:[self getCurrentRecordingPath] error:nil];
 }
 
+-(NSString*)getDocumentDir
+{
+    return [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+}
 @end

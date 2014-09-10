@@ -24,6 +24,10 @@
     //Variable setup for access in the class
     NSURL *recordedTmpFile;
     AVAudioRecorder *recorder;
+    
+    BOOL bCanRecord;
+
+    AVAudioSession * audioSession;
 }
 
 @synthesize statusView = _statusView;
@@ -38,6 +42,11 @@
     bRecording = false;
     [self.stopButton setEnabled:false];
     self.pathHelper = [[BFRecordingPathHelper alloc]init];
+    
+    NSError * error = nil;
+    audioSession = [AVAudioSession sharedInstance];
+    [audioSession setCategory:AVAudioSessionCategoryPlayAndRecord error: &error]; //设置音频类别，这里表示当应用启动，停掉后台其他音频
+    [audioSession setActive:YES error: &error];//设置当前应用音频活跃性
 }
 
 - (void)didReceiveMemoryWarning
@@ -49,17 +58,27 @@
 - (IBAction)startRecording {
     
     if (!bRecording) {
+        
+        if (![self canRecord]) {
+            [[[UIAlertView alloc] initWithTitle:nil
+                              message:[NSString stringWithFormat:@"%@需要访问您的麦克风。\n请启用麦克风-设置/隐私/麦克风", @"Demo"]
+                              delegate:nil
+                              cancelButtonTitle:@"好"
+                              otherButtonTitles:nil] show];
+            return;
+        }
+        
+        
         NSLog(@"Start Recording ... ");
         
         //This is a good resource: http://www.totodotnet.net/tag/avaudiorecorder/
-        NSMutableDictionary* recordSetting = [[NSMutableDictionary alloc] init];
-        
-//        [recordSetting setValue :[NSNumber numberWithInt:kAudioFormatAppleIMA4] forKey:AVFormatIDKey];
-        [recordSetting setValue :[NSNumber numberWithInt: kAudioFormatLinearPCM] forKey:AVFormatIDKey];
-        
-        [recordSetting setValue:[NSNumber numberWithFloat: 16000.0] forKey:AVSampleRateKey];
-        [recordSetting setValue:[NSNumber numberWithInt: 1] forKey:AVNumberOfChannelsKey];
-        [recordSetting setValue:[NSNumber numberWithInt: 16] forKey:AVLinearPCMBitDepthKey];
+        NSDictionary *recordSetting = [[NSDictionary alloc] initWithObjectsAndKeys:
+                                  [NSNumber numberWithFloat: 16000.0],AVSampleRateKey,
+                                  [NSNumber numberWithInt: kAudioFormatLinearPCM],AVFormatIDKey,
+                                  [NSNumber numberWithInt:16],AVLinearPCMBitDepthKey,
+                                  [NSNumber numberWithInt: 1], AVNumberOfChannelsKey,
+                                  [NSNumber numberWithBool:NO],AVLinearPCMIsBigEndianKey,
+                                  [NSNumber numberWithBool:NO],AVLinearPCMIsFloatKey,nil];
         
         recordedTmpFile = [self.pathHelper getNextRecordingPath];
         NSLog(@"Using File called: %@", recordedTmpFile);
@@ -67,8 +86,11 @@
         NSError *error = [[NSError alloc]init];
         recorder = [[ AVAudioRecorder alloc] initWithURL:recordedTmpFile settings:recordSetting error: (&error)];
         [recorder setDelegate:self];
-        [recorder prepareToRecord];
+        BOOL re = [recorder prepareToRecord];
+        NSLog(@"%d", re);
+        
         [recorder record];
+        NSLog(@"%d", re);
         
         bRecording = true;
         [self.startButton setEnabled:false];
@@ -98,5 +120,25 @@
     } else {
         ((BFDataPackageViewController*)segue.destinationViewController).pathHelper = self.pathHelper;
     }
+}
+
+///新增api,获取录音权限. 返回值,YES为无拒绝,NO为拒绝录音.
+- (BOOL)canRecord
+{
+//    __block BOOL bCanRecord = YES;
+    if ([[[UIDevice currentDevice] systemVersion] compare:@"7.0"] != NSOrderedAscending)
+    {
+        AVAudioSession *audioSession = [AVAudioSession sharedInstance];
+        if ([audioSession respondsToSelector:@selector(requestRecordPermission:)]) {
+            [audioSession performSelector:@selector(requestRecordPermission:) withObject:^(BOOL granted) {
+                if (granted) {
+                    bCanRecord = YES;
+                } else {
+                    bCanRecord = NO;
+                }
+            }];
+        }
+    }
+    return bCanRecord;
 }
 @end

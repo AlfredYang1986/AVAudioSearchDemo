@@ -17,7 +17,7 @@
 -(void)resetPathHelper;
 
 #pragma mark -- for recording
--(int)getTotalRecordNumber;
+-(NSInteger)getTotalRecordNumber;
 -(NSURL*)getNextRecordingPath;
 -(NSString*)getDirPath;
 -(NSArray*)getEnumableRecordingPath;
